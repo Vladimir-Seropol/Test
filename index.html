@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <div class="container" id="container">
+        <div class="clock">
+            <div id="time"></div>
+            <div id="date"></div>
+        </div>
+        <div class="weather-widget">
+            <div class="weather-info">
+                <div id="loader" style="display: none;">
+                        <div class="box">
+                            <div class="loader"><span></span></div>
+                            <div class="loader"><span></span></div>
+                            <div class="loader"><i></i></div>
+                            <div class="loader"><i></i></div>
+                        </div>
+                    
+                </div>
+                <p class="city-name" id="city-name" tabindex="1"></p>
+                <div class="input-none" id="input">
+                    <input type="text" id="city" placeholder="Введите название города">
+                    <button onclick="getWeather()">Показать погоду </button>
+                </div>
+                <p id="temperature"></p>
+                <p id="current-weather"></p>
+            </div>
+        </div>
+        <input type="checkbox" id="checkbox-burger" class="input-hamburger">
+			<label for="checkbox-burger" class="hamburger"></label>
+       
+       <form action="#" class="form">
+          <div class="input">
+                    <label for="#"><textarea type="input" class="textarea" id="task" placeholder="Задача*"
+                            ></textarea></label>
+                    <button  class="btn" id="plus"><svg width="20" height="20" viewBox="0 0 48 48"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_0_202)">
+                                <path d="M23 32.34L9.65999 24L6.82999 26.83L18 38L42 14L39.17 11.17L18 32.34Z" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_0_202">
+                                    <rect width="48" height="48" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </button>
+                
+            </div>
+
+
+            <div class="tasks">
+
+                <ol id="plusTask">
+
+                </ol>
+                <p class="tooltip"> Для удаления задачи, нажмите "Удалить"</p>
+
+            </div>
+       </form>
+          
+       
+    </div>
+
+
+
+
+
+
+    <script src="./js/background.js"></script>
+    <script src="./js/clock.js"></script>
+    <script src="./js/weather.js"></script>
+    <script src="./js/todo.js"></script>
+</body>
+
+</html>

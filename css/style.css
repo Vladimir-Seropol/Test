@@ -1,0 +1,311 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 500px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin-top: 50px;
+  margin: 0 auto;
+  background-size: cover;
+  transition: background-image 1s ease-in-out;
+}
+
+img {
+  width: 100%;
+}
+
+.clock {
+  padding-top: 100px;
+  font-size: 40px;
+  margin: 10px 0;
+  color: white;
+}
+
+#date {
+  font-size: 30px;
+  text-transform: capitalize;
+}
+
+.weather-widget {
+  margin: auto;
+  color: white;
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.weather-info {
+  margin-top: 15px;
+}
+
+.input-none {
+  display: none;
+}
+
+.input-block {
+  display: block;
+}
+
+.city-name {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-box-reflect: below 0 linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.3333333333));
+}
+
+.box .loader {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  animation: animateLoading 2s linear infinite;
+}
+
+.box .loader:nth-child(2),
+.box .loader:nth-child(4) {
+  animation-delay: -1s;
+  filter: hue-rotate(290deg);
+}
+
+@keyframes animateLoading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.box .loader:nth-child(1)::before,
+.box .loader:nth-child(2)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to top, transparent, rgba(0, 255, 249, 0.5));
+  background-size: 100px 180px;
+  background-repeat: no-repeat;
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+}
+
+.container .loader i {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  background: #00fff9;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #00fff9, 0 0 20px #00fff9, 0 0 30px #00fff9, 0 0 40px #00fff9, 0 0 50px #00fff9, 0 0 60px #00fff9, 0 0 70px #00fff9, 0 0 80px #00fff9, 0 0 90px #00fff9, 0 0 100px #00fff9;
+  z-index: 10;
+}
+
+.box .loader span {
+  position: absolute;
+  inset: 20px;
+  background: #fff;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.input-hamburger {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  width: 24px;
+  height: 20px;
+  right: 20px;
+  top: 24px;
+}
+
+label.hamburger {
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.input-hamburger + label::before {
+  content: "";
+  background: url(../images/free-icon-note-477868.png);
+  width: 50px;
+  height: 50px;
+}
+
+.input-hamburger:checked + label::before {
+  width: 50px;
+  height: 50px;
+  background: url(../images/free-icon-cross-mark-17048.png);
+}
+
+.header .burger {
+  display: none;
+}
+
+.header label.hamburger {
+  display: none;
+}
+
+#checkbox-burger:checked ~ .form {
+  display: block;
+}
+
+.form {
+  display: none;
+}
+
+label {
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.input ::-moz-placeholder {
+  color: #ffffff;
+  font-size: 14px;
+}
+.input ::placeholder {
+  color: #ffffff;
+  font-size: 14px;
+}
+
+textarea {
+  background: none;
+  color: #fff;
+}
+
+#task {
+  width: 400px;
+  height: 150px;
+  padding-left: 10px;
+  font-size: 25px;
+}
+
+.tasks {
+  width: 100%;
+  padding: 10px;
+  min-height: 152px;
+  position: relative;
+  border-radius: 0 0 5px 5px;
+}
+
+.action-block {
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+
+#checkboxId {
+  margin-right: 5px;
+}
+
+.li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #fff;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-style: normal;
+  border-bottom: 1px solid #fff;
+}
+
+.li::before {
+  content: "Задача: ";
+  color: #fff;
+  font-style: italic;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+ol {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+ol:hover + .tooltip {
+  display: block;
+  transform: translate(-50px, -50px);
+}
+
+.li-active {
+  text-decoration: line-through;
+  color: #000;
+  background-color: rgb(237, 139, 112);
+}
+
+.button {
+  content: "Удалить";
+  max-height: 20px;
+  border: 2px solid #000;
+  cursor: pointer;
+  border-radius: 3px;
+  box-shadow: 2px 3px 5px;
+  margin-left: 10px;
+  color: #000;
+  font-style: italic;
+  font-size: 10px;
+  padding: 3px;
+}
+
+.btn:hover {
+  background-color: rgb(245, 183, 107);
+}
+
+.btn:active {
+  box-shadow: none;
+  color: red;
+  fill: green;
+}
+
+.btn {
+  background-color: rgb(251, 240, 227);
+  display: inline-block;
+  max-height: 20px;
+  width: 50px;
+  border-radius: 3px;
+  border: 1px solid #000;
+  box-shadow: 2px 3px 5px;
+  cursor: pointer;
+  transition: all 0.1s ease-in 0.2s;
+}
+
+.tooltip {
+  font-size: 15px;
+  width: 180px;
+  padding: 15px;
+  background-color: rgb(230, 180, 45);
+  border-radius: 50%;
+  position: absolute;
+  left: 55px;
+  top: -20px;
+  display: none;
+}/*# sourceMappingURL=style.css.map */
