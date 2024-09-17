@@ -32,36 +32,52 @@ function removeTask(task) {
 function loadTasks() {
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     const plusTask = document.getElementById('plusTask');
-    
+
     tasks.forEach(function (task) {
         let li = document.createElement('li');
         li.textContent = task;
         li.className = 'li';
 
-        // Получаем  input
+
+         // Получаем  input checkbox
+        function generateUniqueId() {
+            return 'checkboxId' + Math.random().toString(36).substr(2, 9); // Генерация случайного id
+        }
+    
         const block = document.createElement('div');
         block.classList.add('action-block');
-
+        li.appendChild(block);
+    
         const input = document.createElement('input');
         input.type = 'checkbox';
-        input.id = 'checkboxId';
-
-        // Получаем label
+        input.id = generateUniqueId();
+        input.className = 'check-input';
+    
+        // Получаем  label и привязываем его к input
         const label = document.createElement('label');
         label.htmlFor = input.id;
         label.textContent = 'Не выполнено';
+    
+        // Получаем span 
+        const span = document.createElement('span');
+        span.className = 'check-style';
+    
 
         // Получаем кнопку "Удалить"
         const button = document.createElement('button');
         button.textContent = ' Удалить';
         button.className = 'button btn';
 
-        // Добавляем элементы в список
+        // Добавляем элементы в список li
         li.appendChild(block);
         block.appendChild(input);
+        block.appendChild(span);
         block.appendChild(label);
         block.appendChild(button);
         plusTask.appendChild(li);
+
+
+        
 
         // Обработчик события для кнопки "Удалить"
         button.addEventListener('click', () => {
@@ -74,10 +90,10 @@ function loadTasks() {
         input.addEventListener('change', () => {
             if (input.checked) {
                 li.classList.add('li-active');
-                label.textContent = 'Завершено'; 
+                label.textContent = 'Завершено';
             } else {
                 li.classList.remove('li-active');
-                label.textContent = 'Не выполнено'; 
+                label.textContent = 'Не выполнено';
             }
         });
     });
@@ -104,21 +120,38 @@ function creatDelitElemets(value) {
 
     plusTask.appendChild(li);
 
-    // Создаем новый элемент input
+    // Создаем новый элемент input checkbox
+    function generateUniqueId() {
+        return 'checkboxId' + Math.random().toString(36).substr(2, 9); // Генерация случайного id
+    }
+
     const block = document.createElement('div');
     block.classList.add('action-block');
+    li.appendChild(block);
 
     const input = document.createElement('input');
     input.type = 'checkbox';
-    input.id = 'checkboxId';
+    input.id = generateUniqueId();
+    input.className = 'check-input';
 
-    // Создаем новый элемент label
+    // Создаем новый элемент label и привязываем его к input
     const label = document.createElement('label');
     label.htmlFor = input.id;
     label.textContent = 'Не выполнено';
-    li.appendChild(block);
-    block.appendChild(input);
+
+    // Создаем новый элемент span для стиля
+    const span = document.createElement('span');
+    span.className = 'check-style';
+
+    // Добавляем элементы в блок
+     
+     block.appendChild(input);
+    block.appendChild(span);
     block.appendChild(label);
+   
+
+
+
 
     // Обработчик события для чекбокса
     input.addEventListener('change', () => {
@@ -133,7 +166,7 @@ function creatDelitElemets(value) {
 
 
 
-
+    //Получаем кнопку Удалить в строке li
     const button = document.createElement('button');
 
     block.appendChild(button);
@@ -150,8 +183,8 @@ function creatDelitElemets(value) {
 
 
 
-    //Отметка о выполнении Задачи и ее удаление
- 
+    //Удаление задачи
+
     button.addEventListener('click', () => {
         //e.stopPropagation(); 
         removeTask(task);
@@ -165,10 +198,10 @@ function creatDelitElemets(value) {
 const textarea = document.getElementById('task');
 const button = document.getElementById('plus');
 
-textarea.addEventListener('keypress', function(event) {
+textarea.addEventListener('keypress', function (event) {
     if (event.key === 'Enter') {
-        event.preventDefault(); 
-        button.click(); 
+        event.preventDefault();
+        button.click();
     }
 });
 

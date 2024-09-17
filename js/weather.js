@@ -54,8 +54,15 @@ async function getWeather() {
                 const temperature = data.main.temp;
                 const weather = data.weather[0].description;
                 const translatedWeather = translateWeatherDescription(weather); // Переводим описание погоды
+                //document.createElement(icon).
+                const icon = document.createElement('img');
+                icon.classList.add('img-icon');
+                //icon.url();
+                icon.src = `images/ic_info_outline_48px.svg`;
+
 
                 document.getElementById('city-name').innerText = ` ${city}`;
+                document.getElementById('city-name').appendChild(icon);
                 document.getElementById('temperature').innerText = `Температура: ${temperature}°C`;
                 document.getElementById('current-weather').innerText = `Погода: ${translatedWeather}`;
             }
