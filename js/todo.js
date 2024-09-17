@@ -161,4 +161,16 @@ function creatDelitElemets(value) {
 
 }
 
+//Клик по кнопке Enter
+const textarea = document.getElementById('task');
+const button = document.getElementById('plus');
+
+textarea.addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault(); 
+        button.click(); 
+    }
+});
+
+
 
