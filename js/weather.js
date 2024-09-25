@@ -45,12 +45,12 @@ async function getWeather() {
         console.log(data);
         if (response.ok) {
             const weatherTranslations = {
-                "Clear sky": "Солнечно",
-                "Few clouds": "Переменная облачность",
-                "Scattered clouds": "Малооблачно",
-                "Broken clouds": "Малооблачно",
-                "Overcast clouds": "Облачно",
-                "Rain": "Дождь",
+                // "Clear sky": "Солнечно",
+                // "Few clouds": "Переменная облачность",
+                // "Scattered clouds": "Малооблачно",
+                // "Broken clouds": "Малооблачно",
+                // "Overcast clouds": "Облачно",
+                // "Rain": "Дождь",
                 
             };
 
