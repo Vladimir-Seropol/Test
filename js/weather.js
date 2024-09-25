@@ -1,3 +1,7 @@
+
+
+
+
 // Загрузка последнего введённого города из local storage
 document.addEventListener('DOMContentLoaded', () => {
     const savedCity = localStorage.getItem('lastCity');
@@ -7,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-//
+//loader
 function showLoader() {
     document.getElementById('loader').style.display = 'block';
 }
@@ -18,50 +22,52 @@ function hideLoader() {
 
 
 
-
-//Получение погоды методом fetch из API OpenWeather
 async function getWeather() {
     showLoader();
     const cityInput = document.getElementById('city');
-    const city = cityInput.value;
+    const city = cityInput.value.trim() || 'Краснодар'; 
+    cityInput.value = '';
+
+    // Проверяем, что город введен
+    // if (!city) {
+    //     alert('Пожалуйста, введите название города!');
+    //     hideLoader(); // Скрываем загрузчик, если он был показан
+    //     return;
+    // }
+   
     const apiKey = '260bb157394fea4d450e148689e0c3d5';
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=ru`;
     const cityInputElement = document.getElementById('input');
 
     try {
         const response = await fetch(url);
         const data = await response.json();
-
+        console.log(data);
         if (response.ok) {
-            const weatherTranslations = { //Словарь для перевода описания погоды полученных  из API
-                "clear sky": "ясное небо",
-                "few clouds": "немного облаков",
-                "scattered clouds": "разрозненные облака",
-                "broken clouds": "облачность",
-                "shower rain": "дождь",
-                "rain": "дождь",
-                "thunderstorm": "гроза",
-                "snow": "снег",
-                "mist": "туман",
-                "overcast clouds": "пасмурные облака"
+            const weatherTranslations = {
+                "Clear sky": "Солнечно",
+                "Few clouds": "Переменная облачность",
+                "Scattered clouds": "Малооблачно",
+                "Broken clouds": "Малооблачно",
+                "Overcast clouds": "Облачно",
+                "Rain": "Дождь",
+                
             };
 
             function translateWeatherDescription(description) {
                 return weatherTranslations[description] || description; // Возвращаем перевод или оригинал
             }
 
-            function updateWeatherDisplay(data) {
-                const temperature = data.main.temp;
-                const weather = data.weather[0].description;
-                const translatedWeather = translateWeatherDescription(weather); // Переводим описание погоды
-                //document.createElement(icon).
+            function updateWeatherDisplay(weatherData) {
+                const temperature = weatherData.main.temp; 
+                const weatherDescription = weatherData.weather[0].description; 
+                const translatedWeather = translateWeatherDescription(weatherDescription); // Переводим описание погоды
+
                 const icon = document.createElement('img');
                 icon.classList.add('img-icon');
-                //icon.url();
-                icon.src = `images/ic_info_outline_48px.svg`;
+                icon.src = 'images/ic_info_outline_48px.svg'; 
 
-
-                document.getElementById('city-name').innerText = ` ${city}`;
+                document.getElementById('city-name').innerText = city;
                 document.getElementById('city-name').appendChild(icon);
                 document.getElementById('temperature').innerText = `Температура: ${temperature}°C`;
                 document.getElementById('current-weather').innerText = `Погода: ${translatedWeather}`;
@@ -75,19 +81,18 @@ async function getWeather() {
 
             // Сохраняем город в local storage
             localStorage.setItem('lastCity', city);
-
-            // Очищаем поле ввода
-            cityInput.value = '';
         } else {
-            alert(data.message);
+            console.error(data.message);
+            alert(`Ошибка: ${data.message}`); 
         }
     } catch (error) {
         console.error('Ошибка:', error);
-    }finally {
-        hideLoader();
+        alert('Произошла ошибка при получении данных о погоде.');
+    } finally {
+        hideLoader(); // Скрываем загрузчик
     }
 }
-//getWeather();
+getWeather();
 
 //Открываем поле input при клике на название города
 const cityNameElement = document.getElementById('city-name');
@@ -101,7 +106,6 @@ cityNameElement.addEventListener('click', () => {
 
     }
 });
-
 
 
 
